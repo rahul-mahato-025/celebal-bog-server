@@ -1,5 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { AuthService } from "../services/index.js";
+import serverConfig from "../config/server.config.js";
 
 const authService = new AuthService();
 
@@ -16,8 +17,8 @@ export async function create(req, res, next) {
 
     res.cookie("token", response.token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: serverConfig.ENV === "PROD" ? true : false,
     });
 
     const user = response.user;
@@ -45,7 +46,7 @@ export async function login(req, res, next) {
     res.cookie("token", response.token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: false,
-      secure: false,
+      secure: serverConfig.ENV === "PROD" ? true : false,
     });
 
     const user = response.user;
