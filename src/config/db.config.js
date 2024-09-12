@@ -4,7 +4,7 @@ import serverConfig from "./server.config.js";
 export let pool = "";
 
 if (serverConfig.ENV === "PROD") {
-  const dbURL = `mysql://${MYSQLUSER}:${MYSQL_ROOT_PASSWORD}@${RAILWAY_PRIVATE_DOMAIN}:3306/${MYSQL_DATABASE}`;
+  const dbURL = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.RAILWAY_PRIVATE_DOMAIN}:3306/${process.env.MYSQL_DATABASE}`;
 
   pool = mysql.createPool(dbURL);
 } else {
