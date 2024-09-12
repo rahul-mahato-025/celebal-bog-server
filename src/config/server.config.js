@@ -7,4 +7,5 @@ export default {
   DB_PWD: process.env.DB_PWD,
   DB_NAME: process.env.DB_NAME,
   JWT_SECRET: process.env.JWT_SECRET,
+  DB_PORT: process.env.DB_PORT,
 };
