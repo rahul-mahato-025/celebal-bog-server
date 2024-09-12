@@ -42,6 +42,7 @@ class PostService {
       const posts = await this.postRepository.findAll();
       return posts;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
