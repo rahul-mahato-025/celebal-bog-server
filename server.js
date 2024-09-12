@@ -3,7 +3,6 @@ import serverConfig from "./src/config/server.config.js";
 import apiRouter from "./src/routes/index.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { pool } from "./src/config/db.config.js";
 
 const app = express();
 
@@ -30,5 +29,4 @@ app.use((error, req, res, next) => {
 
 app.listen(serverConfig.PORT, async () => {
   console.log(`Server started at Port ${serverConfig.PORT}`);
-  console.log(pool);
 });
