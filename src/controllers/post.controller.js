@@ -5,12 +5,12 @@ const postService = new PostService();
 
 export async function create(req, res, next) {
   try {
-    const { title, content, images, user_id } = req.body;
+    const { title, content, images } = req.body;
     const postId = await postService.create({
       title,
       content,
       images,
-      user_id,
+      user_id: req.user.id,
     });
 
     return res.status(StatusCodes.CREATED).json({

@@ -8,11 +8,12 @@ class UserRepository {
   async create({ firstName, lastName, email, password }) {
     try {
       password = await hashPassword(password);
-      const [result] = await this.pool.execute(
-        `INSERT INTO User (firstname, lastName, email, password) VALUES(?, ?, ?, ?)`,
+      const [response] = await this.pool.execute(
+        `INSERT INTO Users (firstname, lastName, email, password) VALUES(?, ?, ?, ?)`,
         [firstName, lastName, email, password]
       );
-      return result;
+
+      return response.insertId;
     } catch (error) {
       console.log(error);
       throw error;
@@ -22,7 +23,7 @@ class UserRepository {
   async findById(userId) {
     try {
       const [user] = await this.pool.execute(
-        `SELECT id, firstName, lastName, email FROM User WHERE id = ?`,
+        `SELECT id, firstName, lastName, email FROM Users WHERE id = ?`,
         [userId]
       );
       return user;
@@ -32,7 +33,7 @@ class UserRepository {
   async findByEmail(emailId) {
     try {
       const [user] = await this.pool.execute(
-        `SELECT id, firstName, lastName, email FROM User WHERE email = ?`,
+        `SELECT id, firstName, lastName, email, password FROM Users WHERE email = ?`,
         [emailId]
       );
       return user;

@@ -2,6 +2,7 @@ import express from "express";
 import serverConfig from "./src/config/server.config.js";
 import apiRouter from "./src/routes/index.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", apiRouter);
 
 app.use((error, req, res, next) => {
